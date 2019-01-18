@@ -70,7 +70,8 @@ class LianjiajiuxiaoquSpider(scrapy.Spider):
         year_string = safe_list_get_first(sel.xpath("div[@class='xiaoquDescribe fr']/div[@class='xiaoquInfo']/div[@class='xiaoquInfoItem'][1]/span[@class='xiaoquInfoContent']/text()").extract(), "")
         year_string = year_string.strip()
         year_string_match = self.building_year_pattern.match(year_string)
-        community["building_date"] = year_string_match.group(1) if year_string_match else year_string
+        community["orig_building_date"] = year_string
+        community["building_date"] = year_string_match.group(1) if year_string_match else ""
         community["building_type"] = safe_list_get_first(sel.xpath("div[@class='xiaoquDescribe fr']/div[@class='xiaoquInfo']/div[@class='xiaoquInfoItem'][2]/span[@class='xiaoquInfoContent']/text()").extract(), "")
         community["estate_developer"] = safe_list_get_first(sel.xpath("div[@class='xiaoquDescribe fr']/div[@class='xiaoquInfo']/div[@class='xiaoquInfoItem'][5]/span[@class='xiaoquInfoContent']/text()").extract(), "")
         return community

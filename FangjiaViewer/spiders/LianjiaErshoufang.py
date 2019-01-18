@@ -15,7 +15,7 @@ class LianjiaershoufangSpider(scrapy.Spider):
     root_url = "https://hz.lianjia.com"
     start_urls = ['https://hz.lianjia.com/ershoufang/']
 
-    flood_pattern = re.compile(r"([\u4e00-\u9fff]+楼层)\(共([0-9]*)层\)[0-9]{4}年[\u4e00-\u9fff]+  -  [\u4e00-\u9fff]+")
+    flood_pattern = re.compile(r"([\u4e00-\u9fff]+楼层)\(共([0-9]*)层\)[0-9]{4}年[\u4e00-\u9fff]+.*")
 
     def parse(self, response):
         selections = response.xpath(
@@ -67,8 +67,9 @@ class LianjiaershoufangSpider(scrapy.Spider):
             house['elevator'] = safe_list_get(house_infos, 5, "")
             flood_info = safe_list_get_first(sel.xpath("div[@class='flood']/div[@class='positionInfo']/text()").extract(), "")
             flood_match = self.flood_pattern.match(flood_info)
-            house['flood'] = flood_match.group(1) if flood_match else flood_info
-            house['total_flood'] = flood_match.group(2) if flood_match else flood_info
+            house['orig_flood_info'] = flood_info.strip()
+            house['flood'] = flood_match.group(1) if flood_match else ""
+            house['total_flood'] = flood_match.group(2) if flood_match else ""
             price_info = safe_list_get_first(sel.xpath("div[@class='priceInfo']/div[@class='totalPrice']/span/text()").extract(), "")
             house['total_price'] = price_info + "0000"  # 万
             house['url_lj'] = str.replace(link, self.root_url, "")

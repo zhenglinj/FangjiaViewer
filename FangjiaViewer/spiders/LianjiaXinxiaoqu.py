@@ -52,13 +52,14 @@ class LianjiaxinxiaoquSpider(Spider):
             community['room'] = '|'.join(sel.xpath('a/span/text()').extract())
             area_range = safe_list_get_first(sel.xpath('div[3]/span/text()').extract(), "")
             area_range_match = self.area_range_pattern.match(area_range)
-            community['area_range'] = area_range_match.group(1) if area_range_match else area_range
+            community['orig_area_range'] = area_range.strip()
+            community['area_range'] = area_range_match.group(1) if area_range_match else ""
             community['tags'] = '|'.join(sel.xpath('div[5]/span/text()').extract())
             community['main_avg_price_perm'] = safe_list_get_first(sel.xpath('div[6]/div[1]/span/text()').extract(), "")
             community['min_total_price'] = safe_list_get_first(sel.xpath('div[6]/div[2]/text()').extract(), "")
             total_price = community['min_total_price']
             total_price_match = self.price_pattern.match(community['min_total_price'])
-            community['min_total_price_per_house'] = total_price_match.group(1) + "0000" if total_price_match else total_price  # 100万/套
+            community['min_total_price_per_house'] = total_price_match.group(1) + "0000" if total_price_match else ""  # 100万/套
             community['url_lj'] = link  # eg: /loupan/p_zcxgafsaj/
             url = self.root_url + link + "xiangqing/"
             yield Request(url=url, callback=self.process_community_details, meta={"item": community})
@@ -74,14 +75,18 @@ class LianjiaxinxiaoquSpider(Spider):
         community['building_type'] = safe_list_get_first(sel.xpath("ul[@class='x-box'][2]/li[1]/span[@class='label-val']/text()").extract(), "")
         total_area = safe_list_get_first(sel.xpath("ul[@class='x-box'][2]/li[3]/span[@class='label-val']/text()").extract(), "")
         total_area_match = self.total_area_pattern.match(safe_list_get_first(sel.xpath("ul[@class='x-box'][2]/li[3]/span[@class='label-val']/text()").extract(), ""))
-        community['total_area'] = total_area_match.group(1) if total_area_match else total_area
+        community['orig_total_area'] = total_area.strip()
+        community['total_area'] = total_area_match.group(1) if total_area_match else ""
         total_building_area = safe_list_get_first(sel.xpath("ul[@class='x-box'][2]/li[5]/span[@class='label-val']/text()").extract(), "")
         total_building_area_match = self.total_area_pattern.match(total_building_area)
-        community['total_building_area'] = total_building_area_match.group(1) if total_building_area_match else total_building_area
+        community['orig_total_building_area'] = total_building_area.strip()
+        community['total_building_area'] = total_building_area_match.group(1) if total_building_area_match else ""
         green_rate = safe_list_get_first(sel.xpath("ul[@class='x-box'][2]/li[2]/span[@class='label-val']/text()").extract(), "")
         green_rate_match = self.green_rate_pattern.match(green_rate)
-        community['green_rate'] = green_rate_match.group(1) if green_rate_match else green_rate
+        community['orig_green_rate'] = green_rate.strip()
+        community['green_rate'] = green_rate_match.group(1) if green_rate_match else ""
         volume_rate = safe_list_get_first(sel.xpath("ul[@class='x-box'][2]/li[4]/span[@class='label-val']/text()").extract(), "")
         volume_rate_match = self.volume_rate_pattern.match(volume_rate)
-        community['volume_rate'] = volume_rate_match.group(1) if volume_rate_match else volume_rate
+        community['orig_volume_rate'] = volume_rate.strip()
+        community['volume_rate'] = volume_rate_match.group(1) if volume_rate_match else ""
         return community
