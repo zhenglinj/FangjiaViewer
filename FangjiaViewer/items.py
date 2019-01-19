@@ -47,6 +47,10 @@ class Community(scrapy.Item):
     # short url
     url_lj = scrapy.Field()
 
+    # extra info
+    community_id = scrapy.Field()
+    effective_date = scrapy.Field()
+
 
 class House(scrapy.Item):
     community_name = scrapy.Field()
@@ -63,3 +67,8 @@ class House(scrapy.Item):
     total_price = scrapy.Field()
     # short url
     url_lj = scrapy.Field()
+
+    # extra info
+    community_id = scrapy.Field()
+    house_id = scrapy.Field()
+    effective_date = scrapy.Field()
