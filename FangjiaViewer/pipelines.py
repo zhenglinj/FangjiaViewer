@@ -35,14 +35,12 @@ class FangjiaviewerDbSinkPipeline(object):
 
     def __init__(self):
         if CONFIG.DBENGINE == 'sqlite3':
-            self.engine = create_engine('sqlite:///{0}'.format(os.path.join(os.curdir, 'data', CONFIG.DBNAME + '.db')),
-                                        echo=True)
+            self.engine = create_engine('sqlite:///{0}'.format(os.path.join(os.curdir, 'data', CONFIG.DBNAME + '.db')))
 
         if CONFIG.DBENGINE == 'mysql':
             self.engine = create_engine(
                 'mysql://{0}:{1}@{2}:{3}/{4}?charset=utf8'.format(CONFIG.DBUSER, CONFIG.DBPASSWORD, CONFIG.DBHOST,
-                                                                  CONFIG.DBPORT, CONFIG.DBNAME),
-                echo=True)
+                                                                  CONFIG.DBPORT, CONFIG.DBNAME))
 
         self.DBSession = scoped_session(sessionmaker())
         self.DBSession.remove()
