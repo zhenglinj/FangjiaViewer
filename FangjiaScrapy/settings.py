@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for FangjiaViewer project
+# Scrapy settings for FangjiaScrapy project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,13 +9,13 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'FangjiaViewer'
+BOT_NAME = 'FangjiaScrapy'
 
-SPIDER_MODULES = ['FangjiaViewer.spiders']
-NEWSPIDER_MODULE = 'FangjiaViewer.spiders'
+SPIDER_MODULES = ['FangjiaScrapy.spiders']
+NEWSPIDER_MODULE = 'FangjiaScrapy.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = 'FangjiaViewer (+http://www.yourdomain.com)'
+# USER_AGENT = 'FangjiaScrapy (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 # ROBOTSTXT_OBEY = True
@@ -47,13 +47,13 @@ ROBOTSTXT_OBEY = False
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 # SPIDER_MIDDLEWARES = {
-#    'FangjiaViewer.middlewares.MyCustomSpiderMiddleware': 543,
+#    'FangjiaScrapy.middlewares.MyCustomSpiderMiddleware': 543,
 # }
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 # DOWNLOADER_MIDDLEWARES = {
-#    'FangjiaViewer.middlewares.MyCustomDownloaderMiddleware': 543,
+#    'FangjiaScrapy.middlewares.MyCustomDownloaderMiddleware': 543,
 # }
 
 # Enable or disable extensions
@@ -65,11 +65,11 @@ ROBOTSTXT_OBEY = False
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 # ITEM_PIPELINES = {
-#    'FangjiaViewer.pipelines.SomePipeline': 300,
+#    'FangjiaScrapy.pipelines.SomePipeline': 300,
 # }
 ITEM_PIPELINES = {
-    # 'FangjiaViewer.pipelines.FangjiaviewerPipeline': 300,
-    'FangjiaViewer.pipelines.FangjiaviewerDbSinkPipeline': 300,
+    # 'FangjiaScrapy.pipelines.FangjiaScrapyPipeline': 300,
+    'FangjiaScrapy.pipelines.FangjiaScrapyDbSinkPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -93,4 +93,4 @@ ITEM_PIPELINES = {
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-LOG_LEVEL = 'INFO'
+LOG_LEVEL = 'INFO'  # 'DEBUG'  # 'INFO'

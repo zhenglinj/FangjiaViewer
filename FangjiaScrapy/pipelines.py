@@ -11,21 +11,21 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-import FangjiaViewer.dbconfig as CONFIG
-from FangjiaViewer.itemdaos import Base, ZoneDao, CommunityDao, HouseDao, CommunityHistoryDao, HouseHistoryDao
-from FangjiaViewer.spiders.LianjiaBankuai import LianjiabankuaiSpider
-from FangjiaViewer.spiders.LianjiaXinxiaoqu import LianjiaxinxiaoquSpider
-from FangjiaViewer.spiders.LianjiaJiuxiaoqu import LianjiajiuxiaoquSpider
-from FangjiaViewer.spiders.LianjiaErshoufang import LianjiaershoufangSpider
-from FangjiaViewer.shared import BulkBuffer
+import FangjiaScrapy.dbconfig as CONFIG
+from FangjiaScrapy.itemdaos import Base, ZoneDao, CommunityDao, HouseDao, CommunityHistoryDao, HouseHistoryDao
+from FangjiaScrapy.spiders.LianjiaBankuai import LianjiabankuaiSpider
+from FangjiaScrapy.spiders.LianjiaXinxiaoqu import LianjiaxinxiaoquSpider
+from FangjiaScrapy.spiders.LianjiaJiuxiaoqu import LianjiajiuxiaoquSpider
+from FangjiaScrapy.spiders.LianjiaErshoufang import LianjiaershoufangSpider
+from FangjiaScrapy.shared import BulkBuffer
 
 
-class FangjiaviewerPipeline(object):
+class FangjiaScrapyPipeline(object):
     def process_item(self, item, spider):
         return item
 
 
-class FangjiaviewerDbSinkPipeline(object):
+class FangjiaScrapyDbSinkPipeline(object):
     engine = None
     DBSession = None
     session = None

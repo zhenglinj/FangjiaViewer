@@ -4,9 +4,9 @@ import re
 from scrapy.http import Request
 from scrapy.spiders import Spider
 
-from FangjiaViewer.config import LJCONFIG
-from FangjiaViewer.items import Community
-from FangjiaViewer.shared import safe_list_get_first
+from FangjiaScrapy.config import LJCONFIG
+from FangjiaScrapy.items import Community
+from FangjiaScrapy.shared import safe_list_get_first
 
 
 class LianjiaxinxiaoquSpider(Spider):

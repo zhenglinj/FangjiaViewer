@@ -2,16 +2,16 @@
 
 import unittest
 
-from FangjiaViewer.items import Community
-from FangjiaViewer.itemdaos import CommunityDao
-from FangjiaViewer.pipelines import FangjiaviewerDbSinkPipeline
+from FangjiaScrapy.items import Community
+from FangjiaScrapy.itemdaos import CommunityDao
+from FangjiaScrapy.pipelines import FangjiaScrapyDbSinkPipeline
 
 
-class TestFangjiaviewerPipeline(unittest.TestCase):
+class TestFangjiaScrapyPipeline(unittest.TestCase):
     pipeline = None
 
     def setUp(self):
-        self.pipeline = FangjiaviewerDbSinkPipeline()
+        self.pipeline = FangjiaScrapyDbSinkPipeline()
 
     def testDbInsertData(self):
         item = Community()
