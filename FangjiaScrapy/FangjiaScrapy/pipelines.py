@@ -11,13 +11,13 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-import FangjiaScrapy.dbconfig as CONFIG
-from FangjiaScrapy.itemdaos import Base, ZoneDao, CommunityDao, HouseDao, CommunityHistoryDao, HouseHistoryDao
-from FangjiaScrapy.spiders.LianjiaBankuai import LianjiabankuaiSpider
-from FangjiaScrapy.spiders.LianjiaXinxiaoqu import LianjiaxinxiaoquSpider
-from FangjiaScrapy.spiders.LianjiaJiuxiaoqu import LianjiajiuxiaoquSpider
-from FangjiaScrapy.spiders.LianjiaErshoufang import LianjiaershoufangSpider
-from FangjiaScrapy.shared import BulkBuffer
+from .config import DBConfig
+from .itemdaos import Base, ZoneDao, CommunityDao, HouseDao, CommunityHistoryDao, HouseHistoryDao
+from .spiders.LianjiaBankuai import LianjiabankuaiSpider
+from .spiders.LianjiaXinxiaoqu import LianjiaxinxiaoquSpider
+from .spiders.LianjiaJiuxiaoqu import LianjiajiuxiaoquSpider
+from .spiders.LianjiaErshoufang import LianjiaershoufangSpider
+from .shared import BulkBuffer
 
 
 class FangjiaScrapyPipeline(object):
@@ -30,17 +30,17 @@ class FangjiaScrapyDbSinkPipeline(object):
     DBSession = None
     session = None
     buffer = BulkBuffer()
-    bulk_size = CONFIG.DB_BULK_SIZE
+    bulk_size = DBConfig.DB_BULK_SIZE
     is_initialized = True  # if it is the first time, the is_initialized=false, else the is_initialized=True
 
     def __init__(self):
-        if CONFIG.DBENGINE == 'sqlite3':
-            self.engine = create_engine('sqlite:///{0}'.format(os.path.join(os.curdir, 'data', CONFIG.DBNAME + '.db')))
+        if DBConfig.DBENGINE == 'sqlite3':
+            self.engine = create_engine('sqlite:///{0}'.format(os.path.join(os.curdir, '..', 'data', DBConfig.DBNAME + '.db')))
 
-        if CONFIG.DBENGINE == 'mysql':
+        if DBConfig.DBENGINE == 'mysql':
             self.engine = create_engine(
-                'mysql://{0}:{1}@{2}:{3}/{4}?charset=utf8'.format(CONFIG.DBUSER, CONFIG.DBPASSWORD, CONFIG.DBHOST,
-                                                                  CONFIG.DBPORT, CONFIG.DBNAME))
+                'mysql://{0}:{1}@{2}:{3}/{4}?charset=utf8'.format(DBConfig.DBUSER, DBConfig.DBPASSWORD, DBConfig.DBHOST,
+                                                                  DBConfig.DBPORT, DBConfig.DBNAME))
 
         self.DBSession = scoped_session(sessionmaker())
         self.DBSession.remove()

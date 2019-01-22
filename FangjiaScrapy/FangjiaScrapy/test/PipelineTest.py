@@ -2,9 +2,9 @@
 
 import unittest
 
-from FangjiaScrapy.items import Community
-from FangjiaScrapy.itemdaos import CommunityDao
-from FangjiaScrapy.pipelines import FangjiaScrapyDbSinkPipeline
+from .items import Community
+from .itemdaos import CommunityDao
+from .pipelines import DbSinkPipeline
 
 
 class TestFangjiaScrapyPipeline(unittest.TestCase):

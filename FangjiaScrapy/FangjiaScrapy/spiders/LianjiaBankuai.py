@@ -2,8 +2,8 @@
 import scrapy
 from scrapy.http import Request
 
-from FangjiaScrapy.items import Zone
-from FangjiaScrapy.shared import safe_list_get_first
+from ..items import Zone
+from ..shared import safe_list_get_first
 
 class LianjiabankuaiSpider(scrapy.Spider):
     name = 'LianjiaBankuai'

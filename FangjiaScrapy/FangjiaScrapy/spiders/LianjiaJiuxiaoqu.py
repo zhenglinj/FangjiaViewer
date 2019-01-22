@@ -3,9 +3,9 @@ import re
 import scrapy
 from scrapy.http import Request
 
-from FangjiaScrapy.config import LJCONFIG
-from FangjiaScrapy.items import Community
-from FangjiaScrapy.shared import safe_list_get_first
+from ..config import LianjiaConfig
+from ..items import Community
+from ..shared import safe_list_get_first
 
 
 class LianjiajiuxiaoquSpider(scrapy.Spider):
@@ -41,7 +41,7 @@ class LianjiajiuxiaoquSpider(scrapy.Spider):
         if max_items and item_num_per_page != 0:
             max_page = (max_items + item_num_per_page - 1) / item_num_per_page
         else:
-            max_page = LJCONFIG['MAXPAGE']
+            max_page = LianjiaConfig.MAXPAGE
         # max_page = 2  # TODO: debug
         urls = [
             response.url + "/pg" + str(pgIdx) + '/' for pgIdx in range(1, int(max_page))
