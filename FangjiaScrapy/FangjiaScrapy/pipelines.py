@@ -78,6 +78,7 @@ class FangjiaScrapyDbSinkPipeline(object):
                 item["effective_date"] = datetime.datetime.today()
                 self.buffer.add(item)
         else:
+            item["effective_date"] = datetime.datetime.today()
             self.buffer.add(item)
         self.process_bulk(spider, self.bulk_size)
 
@@ -93,6 +94,7 @@ class FangjiaScrapyDbSinkPipeline(object):
                 item["effective_date"] = datetime.datetime.today()
                 self.buffer.add(item)
         else:
+            item["effective_date"] = datetime.datetime.today()
             self.buffer.add(item)
         self.process_bulk(spider, self.bulk_size)
 

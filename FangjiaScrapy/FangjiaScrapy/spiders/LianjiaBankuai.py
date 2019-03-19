@@ -3,7 +3,7 @@ import scrapy
 from scrapy.http import Request
 
 from ..items import Zone
-from ..shared import safe_list_get_first
+
 
 class LianjiabankuaiSpider(scrapy.Spider):
     name = 'LianjiaBankuai'
@@ -16,8 +16,8 @@ class LianjiabankuaiSpider(scrapy.Spider):
             "/html/body/div[3]/div[@class='m-filter']/div[@class='position']/dl[2]/dd/div[1]/div/a")
         for sel in selections:
             zone = Zone()
-            zone["district"] = safe_list_get_first(sel.xpath("text()").extract(), "")
-            link = safe_list_get_first(sel.xpath("@href").extract(), "")  # eg: /ershoufang/xihu/
+            zone["district"] = sel.xpath("text()").extract_first()
+            link = sel.xpath("@href").extract_first()  # eg: /ershoufang/xihu/
             url = self.root_url + link
             zone["district_url_lj"] = link
             yield Request(url=url, callback=self.process_section1, meta={'item': zone})
@@ -27,7 +27,7 @@ class LianjiabankuaiSpider(scrapy.Spider):
             "/html/body/div[3]/div[@class='m-filter']/div[@class='position']/dl[2]/dd/div[1]/div[2]/a")
         for sel in selections:
             zone = response.meta.get('item').copy()
-            zone["bizcircle"] = safe_list_get_first(sel.xpath("text()").extract(), "")
-            link = safe_list_get_first(sel.xpath("@href").extract(), "")  # eg: /ershoufang/cuiyuan/
+            zone["bizcircle"] = sel.xpath("text()").extract_first()
+            link = sel.xpath("@href").extract_first()  # eg: /ershoufang/cuiyuan/
             zone["bizcircle_url_lj"] = link
             yield zone
